@@ -77,7 +77,23 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etTelefono" />
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Tipo de Mascotas"
+                android:id="@+id/tv_mascotas"/>
+            <Spinner
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="30dp"
+                android:id="@+id/spinner"/>
+        </LinearLayout>
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
@@ -100,7 +116,7 @@
                 android:text="Todo" />
 
             <Button
-                android:id="@+id/btnConsultarUsuario"
+                android:id="@+id/btnConsultarCita"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="20"
@@ -143,5 +159,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

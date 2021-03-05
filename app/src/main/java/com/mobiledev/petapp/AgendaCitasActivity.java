@@ -5,12 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,14 +28,19 @@ import com.google.firebase.database.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AgendaCitasActivity extends AppCompatActivity {
+public class AgendaCitasActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     EditText etUsuario, etContrasena, etTelefono, etEmail;
-    Button btnConsultar, btnConsultarUsuario, btnAgregar, btnEditar, btnEliminar,btnlogout;;
+    Button btnConsultar, btnConsultarCita, btnAgregar, btnEditar, btnEliminar,btnlogout;;
     RecyclerView rvUsuarios;
+    Spinner spinner;
+    TextView textView;
+    String item;
     DatabaseReference databaseReference;
-    List<Usuario> listaUsuarios = new ArrayList<>();
+    List<Citas> listaCitas = new ArrayList<>();
     AdaptadorActivity adaptador;
+    String[] tipo_mascotas = {"Elige un tipo de mascota", "Perro", "Gato", "Conejo", "Tortuga"};
+    Citas cita;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,18 +52,32 @@ public class AgendaCitasActivity extends AppCompatActivity {
         etTelefono = findViewById(R.id.etTelefono);
         etEmail = findViewById(R.id.etEmail);
         btnConsultar = findViewById(R.id.btnConsultar);
-        btnConsultarUsuario = findViewById(R.id.btnConsultarUsuario);
+        btnConsultarCita = findViewById(R.id.btnConsultarCita);
         btnAgregar = findViewById(R.id.btnAgregar);
         btnEditar = findViewById(R.id.btnEditar);
         btnEliminar = findViewById(R.id.btnEliminar);
         rvUsuarios = findViewById(R.id.rvUsuarios);
         rvUsuarios.setLayoutManager(new GridLayoutManager(this, 1));
         databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        textView = findViewById(R.id.tv_mascotas);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference();
+        spinner = findViewById(R.id.spinner);
+        spinner.setOnItemSelectedListener(this);
+
+        cita = new Citas();
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,tipo_mascotas);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(arrayAdapter);
+
         btnlogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(AgendaCitasActivity.this, MainActivity.class));
+
             }
         });
 
@@ -70,11 +92,11 @@ public class AgendaCitasActivity extends AppCompatActivity {
 
         btnConsultar.setOnClickListener(view -> obtenerUsuarios());
 
-        btnConsultarUsuario.setOnClickListener(view -> obtenerUsuario());
+        btnConsultarCita.setOnClickListener(view -> obtenerUsuario());
     }
 
     public void obtenerUsuario() {
-        listaUsuarios.clear();
+        listaCitas.clear();
         String usuario = etUsuario.getText().toString();
 
         Query query = databaseReference.child("usuario").orderByChild("usuario").equalTo(usuario);
@@ -82,10 +104,10 @@ public class AgendaCitasActivity extends AppCompatActivity {
             @Override
             public void onDataChange( DataSnapshot dataSnapshot) {
                 for(DataSnapshot objeto : dataSnapshot.getChildren()) {
-                    listaUsuarios.add(objeto.getValue(Usuario.class));
+                    listaCitas.add(objeto.getValue(Citas.class));
                 }
 
-                adaptador = new AdaptadorActivity(AgendaCitasActivity.this, listaUsuarios);
+                adaptador = new AdaptadorActivity(AgendaCitasActivity.this, listaCitas);
                 rvUsuarios.setAdapter(adaptador);
 
                 limpiarCampos();
@@ -99,15 +121,15 @@ public class AgendaCitasActivity extends AppCompatActivity {
     }
 
     public void obtenerUsuarios() {
-        listaUsuarios.clear();
+        listaCitas.clear();
         databaseReference.child("usuario").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot objeto : dataSnapshot.getChildren()) {
-                    listaUsuarios.add(objeto.getValue(Usuario.class));
+                    listaCitas.add(objeto.getValue(Citas.class));
                 }
 
-                adaptador = new AdaptadorActivity(AgendaCitasActivity.this, listaUsuarios);
+                adaptador = new AdaptadorActivity(AgendaCitasActivity.this, listaCitas);
                 rvUsuarios.setAdapter(adaptador);
             }
 
@@ -121,17 +143,20 @@ public class AgendaCitasActivity extends AppCompatActivity {
     }
 
     public void agregarUsuario() {
-        listaUsuarios.clear();
+        listaCitas.clear();
         String user=etUsuario.getText().toString();
         String name=etContrasena.getText().toString();
         String tel=etTelefono.getText().toString();
         String emai=etEmail.getText().toString();
+        String item=spinner.getSelectedItem().toString();
 
-        if(user.isEmpty()||name.isEmpty()||tel.isEmpty()||emai.isEmpty()){
+        if (item == "Elige un tipo de mascota"){
+            Toast.makeText(this,"Elegir un tipo de mascota",Toast.LENGTH_SHORT).show();
+        }else if(user.isEmpty()||name.isEmpty()||tel.isEmpty()||emai.isEmpty()){
             Toast.makeText(AgendaCitasActivity.this, "Complete todos los campos", Toast.LENGTH_SHORT).show();
         }else{
-            Usuario usuario = new Usuario(
-                    user,name,tel,emai
+            Citas citas = new Citas(
+                    user,name,tel,emai,item
             );
 
         /*Usuario usuario = new Usuario(
@@ -141,7 +166,7 @@ public class AgendaCitasActivity extends AppCompatActivity {
                 etEmail.getText().toString()
         );*/
 
-            databaseReference.child("usuario").push().setValue(usuario,
+            databaseReference.child("usuario").push().setValue(citas,
                     new DatabaseReference.CompletionListener() {
                         @Override
                         public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
@@ -154,20 +179,25 @@ public class AgendaCitasActivity extends AppCompatActivity {
 
     }
 
+
+
     public void editarUsuario() {
-        listaUsuarios.clear();
+        listaCitas.clear();
         String user=etUsuario.getText().toString();
         String name=etContrasena.getText().toString();
         String tel=etTelefono.getText().toString();
         String emai=etEmail.getText().toString();
+        String item=spinner.getSelectedItem().toString();
 
-        if(user.isEmpty()||name.isEmpty()||tel.isEmpty()||emai.isEmpty()){
+    if(item == "Elige un tipo de mascota") {
+        Toast.makeText(this, "Elegir un tipo de mascota", Toast.LENGTH_SHORT).show();
+    }else if(user.isEmpty()||name.isEmpty()||tel.isEmpty()||emai.isEmpty()){
             Toast.makeText(AgendaCitasActivity.this, "Complete todos los campos", Toast.LENGTH_SHORT).show();
         }else{
-            Usuario usuario = new Usuario(
-                    user,name,tel,emai
+            Citas citas = new Citas(
+                    user,name,tel,emai,item
             );
-            Query query = databaseReference.child("usuario").orderByChild("usuario").equalTo(usuario.getUsuario());
+            Query query = databaseReference.child("usuario").orderByChild("usuario").equalTo(citas.getTipo_mascota());
             query.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -178,7 +208,7 @@ public class AgendaCitasActivity extends AppCompatActivity {
                     if(key.isEmpty()){
                         Toast.makeText(AgendaCitasActivity.this, "Usuario no encontrado", Toast.LENGTH_SHORT).show();
                     }else{
-                        databaseReference.child("usuario").child(key).setValue(usuario);
+                        databaseReference.child("usuario").child(key).setValue(citas);
                     }
                 }
 
@@ -196,7 +226,7 @@ public class AgendaCitasActivity extends AppCompatActivity {
     }
 
     public void eliminarUsuario() {
-        listaUsuarios.clear();
+        listaCitas.clear();
         String usuario = etUsuario.getText().toString();
 
         if(usuario.isEmpty()){
@@ -230,4 +260,16 @@ public class AgendaCitasActivity extends AppCompatActivity {
         etTelefono.setText("");
         etEmail.setText("");
     }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+
 }

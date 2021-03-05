@@ -15,11 +15,11 @@ import java.util.List;
 public class AdaptadorActivity extends RecyclerView.Adapter<AdaptadorActivity.UsuarioViewHolder> {
 
     Context context;
-    List<Usuario> listaUsuarios;
+    List<Citas> listaCitas;
 
-    public AdaptadorActivity(Context context, List<Usuario> listaUsuarios) {
+    public AdaptadorActivity(Context context, List<Citas> listaCitas) {
         this.context = context;
-        this.listaUsuarios = listaUsuarios;
+        this.listaCitas = listaCitas;
     }
 
     @NonNull
@@ -31,15 +31,15 @@ public class AdaptadorActivity extends RecyclerView.Adapter<AdaptadorActivity.Us
 
     @Override
     public void onBindViewHolder(@NonNull UsuarioViewHolder holder, int position) {
-        holder.tvUsuario.setText(listaUsuarios.get(position).getUsuario());
-        holder.tvContrasena.setText(listaUsuarios.get(position).getContrasena());
-        holder.tvTelefono.setText(listaUsuarios.get(position).getTelefono());
-        holder.tvEmail.setText(listaUsuarios.get(position).getEmail());
+        holder.tvUsuario.setText(listaCitas.get(position).getTipo_mascota());
+        holder.tvContrasena.setText(listaCitas.get(position).getContrasena());
+        holder.tvTelefono.setText(listaCitas.get(position).getTelefono());
+        holder.tvEmail.setText(listaCitas.get(position).getEmail());
     }
 
     @Override
     public int getItemCount() {
-        return listaUsuarios.size();
+        return listaCitas.size();
     }
 
     public static class UsuarioViewHolder extends RecyclerView.ViewHolder {
