@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "665497478477",
+    "project_id": "pet-app-6b3db",
+    "storage_bucket": "pet-app-6b3db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:665497478477:android:778bd8fbd8759e8aa50304",
+        "android_client_info": {
+          "package_name": "com.rosado.petapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "665497478477-3du40dgumtp8127giqa48eao0qpaq4e6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rosado.petapp",
+            "certificate_hash": "ee205a588e68ead388358126d56b0b5c26f49278"
+          }
+        },
+        {
+          "client_id": "665497478477-fhv1l2h25phqpjtgvvf5bpufumc1msa5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-CamFS7gzcvRfS0EZz27SZqJtHAfRM7U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "665497478477-fhv1l2h25phqpjtgvvf5bpufumc1msa5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
