@@ -73,6 +73,18 @@
     </LinearLayout>
 
     <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/linearLayout"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="4dp"
+    android:fontFamily="@font/calibri"
+    android:gravity="center"
+    android:text="Rosado Parraga Dannes"
+    android:textColor="#9affffff"
+    android:textSize="10sp"
+        android:textStyle="bold"/>
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout"
@@ -80,9 +92,11 @@
         android:layout_marginTop="4dp"
         android:fontFamily="@font/calibri"
         android:gravity="center"
-        android:text="Tu mejor veterinaria a un mejor alcance"
+        android:text="Veliz Barcia Jonathan"
         android:textColor="#9affffff"
-        android:textSize="10sp" />
+        android:textSize="10sp"
+        android:paddingTop="20dp"
+        android:textStyle="bold"/>
 
 
     <LinearLayout
