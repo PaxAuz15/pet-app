@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
-    tools:context=".LoginActivity">
+    tools:context=".SignUpActivity">
 
     <FrameLayout
         android:layout_width="wrap_content"
@@ -94,7 +94,17 @@
         android:paddingLeft="32dp"
         android:paddingRight="32dp">
 
-
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawablePadding="16dp"
+            android:drawableRight="@drawable/ic_user_white_24dp"
+            android:fontFamily="@font/calibri"
+            android:hint="Usuario"
+            android:maxLines="1"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:id="@+id/nameEditText"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -145,19 +155,6 @@
                 android:textColor="#96ffffff"
                 android:textSize="16dp"
                 android:id="@+id/registerButton"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:background="@drawable/buttonshapewhitebg"
-                android:fontFamily="@font/calibri"
-                android:text="Iniciar Sesión"
-                android:textAllCaps="false"
-                android:textColor="#96ffffff"
-                android:textSize="16dp"
-                android:textStyle="bold"
-                android:id="@+id/loginButton"/>
 
 
         </LinearLayout>
