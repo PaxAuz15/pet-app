@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".CitasActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="114dp"
+            tools:layout_editor_absoluteY="380dp"
+            android:background="@drawable/good_night_img">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="25dp"
+                    android:text="INGRESE LA CITA"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/edt_fecha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:enabled="false"
+                    android:hint="Ingrese la fecha"
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white"/>
+
+                <Button
+                    android:id="@+id/btnDateIngreso"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="FECHA" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_mascotas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Tipo de Mascotas"
+                    android:textColor="@color/white"/>
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="30dp"
+                    android:entries="@array/spinnerItems"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_detalle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="30dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:drawableEnd="@android:drawable/arrow_down_float"
+                    android:drawablePadding="16dp"
+                    android:hint="Razones de la cita"
+                    android:padding="12dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_totalShow"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="Costo: $0.00"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"/>
+
+                    <Button
+                        android:id="@+id/btnAgregar"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingHorizontal="20dp"
+                        android:text="Agendar" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="BUSQUE LA CITA"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Spinner
+                    android:id="@+id/spinnerBuscar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:entries="@array/spinnerItems"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/input_minimal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:enabled="false"
+                            android:hint="Fecha Mínima"
+                            android:inputType="text"
+                            android:textSize="12dp"
+                            android:textColorHint="@color/white"
+                            android:textColor="@color/white"/>
+
+                        <Button
+                            android:id="@+id/btn_minimal"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:drawableRight="@drawable/ic_menu_calendar"
+                            android:paddingEnd="9dp"
+                            tools:ignore="RtlHardcoded"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/input_maximal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:enabled="false"
+                            android:hint="Fecha Máxima"
+                            android:inputType="text"
+                            android:textSize="12dp"
+                            android:textColorHint="@color/white"
+                            android:textColor="@color/white"/>
+
+                        <Button
+                            android:id="@+id/btn_maximal"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:drawableRight="@drawable/ic_menu_calendar"
+                            android:paddingEnd="9dp" />
+
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/cari"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginStart="10dp"
+                        android:drawableRight="@android:drawable/ic_menu_search"
+                        android:enabled="false"
+                        android:paddingEnd="9dp" />
+                </LinearLayout>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Resultados de la búsqueda"
+                android:textAlignment="center"
+                android:textColor="@color/white"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+</RelativeLayout>

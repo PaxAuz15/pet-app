@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //Verifica si el usuario es null
         if(firebaseUser != null){
-            Intent intent = new Intent(LoginActivity.this, AgendaCitasActivity.class);
+            Intent intent = new Intent(LoginActivity.this, CitasActivity.class);
             startActivity(intent);
             finish();
         }
@@ -62,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
-                                Intent intent = new Intent(LoginActivity.this, AgendaCitasActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, CitasActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                                 finish();
@@ -79,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
         btnregister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, RegistroActivity.class));
+                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
             }
         });
     }
